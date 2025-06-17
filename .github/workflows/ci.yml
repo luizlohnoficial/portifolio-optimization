@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install pytest
+    - name: Run tests
+      run: |
+        if ls -1 tests/*.py > /dev/null 2>&1; then pytest; else echo "No tests to run."; fi
