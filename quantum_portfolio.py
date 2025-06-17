@@ -2,7 +2,9 @@ import numpy as np
 from qiskit_finance.applications.optimization import PortfolioOptimization
 from qiskit_optimization.algorithms import MinimumEigenOptimizer
 from qiskit.algorithms import QAOA
+import os
 from qiskit.primitives import Sampler
+from qiskit_ibm_provider import IBMProvider
 
 
 def main():
@@ -27,7 +29,14 @@ def main():
     qp = portfolio.to_quadratic_program()
 
     # solve using QAOA
-    sampler = Sampler()
+    token = os.environ.get("IBM_QUANTUM_TOKEN")
+    if token:
+        provider = IBMProvider(token=token)
+        backend_name = os.environ.get("IBM_QUANTUM_BACKEND", "ibmq_qasm_simulator")
+        backend = provider.get_backend(backend_name)
+        sampler = Sampler(backend=backend)
+    else:
+        sampler = Sampler()
     qaoa = QAOA(sampler)
     optimizer = MinimumEigenOptimizer(qaoa)
     result = optimizer.solve(qp)

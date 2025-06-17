@@ -1,0 +1,27 @@
+name: IBM Quantum
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/ibm-quantum.yml'
+      - 'quantum_portfolio.py'
+      - 'requirements.txt'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run portfolio optimization on IBM Quantum
+        env:
+          IBM_QUANTUM_TOKEN: ${{ secrets.IBM_QUANTUM_TOKEN }}
+          IBM_QUANTUM_BACKEND: ${{ secrets.IBM_QUANTUM_BACKEND }}
+        run: python quantum_portfolio.py
