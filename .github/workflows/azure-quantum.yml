@@ -1,10 +1,10 @@
-name: IBM Quantum
+name: Azure Quantum
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/ibm-quantum.yml'
+      - '.github/workflows/azure-quantum.yml'
       - 'quantum_portfolio.py'
       - 'requirements.txt'
 
@@ -20,8 +20,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-      - name: Run portfolio optimization on IBM Quantum
+      - name: Run portfolio optimization on Azure Quantum
         env:
-          IBM_QUANTUM_TOKEN: ${{ secrets.IBM_QUANTUM_TOKEN }}
-          IBM_QUANTUM_BACKEND: ${{ secrets.IBM_QUANTUM_BACKEND }}
+          AZURE_QUANTUM_RESOURCE_ID: ${{ secrets.AZURE_QUANTUM_RESOURCE_ID }}
+          AZURE_QUANTUM_LOCATION: ${{ secrets.AZURE_QUANTUM_LOCATION }}
+          AZURE_QUANTUM_BACKEND: ${{ secrets.AZURE_QUANTUM_BACKEND }}
         run: python quantum_portfolio.py

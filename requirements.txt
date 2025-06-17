@@ -2,4 +2,4 @@ qiskit
 qiskit_aer
 qiskit_finance
 qiskit_optimization
-qiskit_ibm_provider
+qiskit-azure-quantum

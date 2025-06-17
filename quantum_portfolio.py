@@ -4,7 +4,7 @@ from qiskit_optimization.algorithms import MinimumEigenOptimizer
 from qiskit.algorithms import QAOA
 import os
 from qiskit.primitives import Sampler
-from qiskit_ibm_provider import IBMProvider
+from azure.quantum.qiskit import AzureQuantumProvider
 
 
 def main():
@@ -29,10 +29,11 @@ def main():
     qp = portfolio.to_quadratic_program()
 
     # solve using QAOA
-    token = os.environ.get("IBM_QUANTUM_TOKEN")
-    if token:
-        provider = IBMProvider(token=token)
-        backend_name = os.environ.get("IBM_QUANTUM_BACKEND", "ibmq_qasm_simulator")
+    resource_id = os.environ.get("AZURE_QUANTUM_RESOURCE_ID")
+    location = os.environ.get("AZURE_QUANTUM_LOCATION")
+    if resource_id and location:
+        provider = AzureQuantumProvider(resource_id=resource_id, location=location)
+        backend_name = os.environ.get("AZURE_QUANTUM_BACKEND", "ionq.simulator")
         backend = provider.get_backend(backend_name)
         sampler = Sampler(backend=backend)
     else:

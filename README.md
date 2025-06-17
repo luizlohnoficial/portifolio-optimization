@@ -5,12 +5,12 @@ This repository contains a small example using Qiskit to solve a portfolio optim
 ## Requirements
 
 - Python 3.11+
-- `qiskit`, `qiskit_aer`, `qiskit_finance`, `qiskit_optimization`, and `qiskit_ibm_provider`
+- `qiskit`, `qiskit_aer`, `qiskit_finance`, `qiskit_optimization`, and `qiskit-azure-quantum`
 
 To install the dependencies run:
 
 ```bash
-pip install qiskit qiskit_aer qiskit_finance qiskit_optimization
+pip install qiskit qiskit_aer qiskit_finance qiskit_optimization qiskit-azure-quantum
 ```
 
 ## Running
@@ -23,15 +23,16 @@ python quantum_portfolio.py
 
 The example creates a simple portfolio of four assets and uses QAOA to find an optimal allocation given a budget and risk factor.
 
-## GitHub Actions and IBM Quantum
+## GitHub Actions and Azure Quantum
 
-This repository includes a workflow (`ibm-quantum.yml`) that can run the
-optimization on IBM Quantum backends. To enable it, add the following secrets
+This repository includes a workflow (`azure-quantum.yml`) that can run the
+optimization on Azure Quantum backends. To enable it, add the following secrets
 to your repository:
 
-- `IBM_QUANTUM_TOKEN` – your IBM Quantum API token.
-- `IBM_QUANTUM_BACKEND` – (optional) name of the backend to use, e.g.
-  `ibmq_qasm_simulator`.
+- `AZURE_QUANTUM_RESOURCE_ID` – your Azure Quantum workspace resource ID.
+- `AZURE_QUANTUM_LOCATION` – the region of the workspace, e.g. `westus`.
+- `AZURE_QUANTUM_BACKEND` – (optional) name of the backend to use, e.g.
+  `ionq.simulator`.
 
 Once configured you can trigger the workflow manually from the Actions tab or
 whenever the workflow file or script changes.
