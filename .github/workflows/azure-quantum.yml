@@ -1,16 +1,16 @@
 name: Azure Quantum
 
 on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/azure-quantum.yml'
-      - 'src/quantum_portfolio/**'
-      - 'requirements.txt'
 
 jobs:
   run:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
