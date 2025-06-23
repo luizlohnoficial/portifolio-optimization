@@ -1,0 +1,28 @@
+name: Azure Quantum
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/azure-quantum.yml'
+      - 'quantum_portfolio.py'
+      - 'requirements.txt'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run portfolio optimization on Azure Quantum
+        env:
+          AZURE_QUANTUM_RESOURCE_ID: ${{ secrets.AZURE_QUANTUM_RESOURCE_ID }}
+          AZURE_QUANTUM_LOCATION: ${{ secrets.AZURE_QUANTUM_LOCATION }}
+          AZURE_QUANTUM_BACKEND: ${{ secrets.AZURE_QUANTUM_BACKEND }}
+        run: python quantum_portfolio.py
