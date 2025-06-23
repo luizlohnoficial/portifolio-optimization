@@ -7,7 +7,7 @@ name = "quantum-portfolio"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
-    "qiskit",
+    "qiskit<1",
     "qiskit_aer",
     "qiskit_finance",
     "qiskit_optimization",
