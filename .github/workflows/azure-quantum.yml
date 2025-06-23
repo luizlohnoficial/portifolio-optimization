@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - '.github/workflows/azure-quantum.yml'
-      - 'quantum_portfolio.py'
+      - 'src/quantum_portfolio/**'
       - 'requirements.txt'
 
 jobs:
@@ -25,4 +25,4 @@ jobs:
           AZURE_QUANTUM_RESOURCE_ID: ${{ secrets.AZURE_QUANTUM_RESOURCE_ID }}
           AZURE_QUANTUM_LOCATION: ${{ secrets.AZURE_QUANTUM_LOCATION }}
           AZURE_QUANTUM_BACKEND: ${{ secrets.AZURE_QUANTUM_BACKEND }}
-        run: python quantum_portfolio.py
+        run: python -m quantum_portfolio

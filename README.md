@@ -10,15 +10,15 @@ This repository contains a small example using Qiskit to solve a portfolio optim
 To install the dependencies run:
 
 ```bash
-pip install qiskit qiskit_aer qiskit_finance qiskit_optimization qiskit-azure-quantum
+pip install .
 ```
 
 ## Running
 
-Execute the script with Python:
+Execute the module with Python:
 
 ```bash
-python quantum_portfolio.py
+python -m quantum_portfolio
 ```
 
 The example creates a simple portfolio of four assets and uses QAOA to find an optimal allocation given a budget and risk factor.
