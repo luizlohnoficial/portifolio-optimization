@@ -43,6 +43,7 @@ def main():
     result = optimizer.solve(qp)
 
     print(result)
+    return result
 
 
 if __name__ == "__main__":

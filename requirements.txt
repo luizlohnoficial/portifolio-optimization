@@ -1,5 +1,5 @@
-qiskit
+qiskit<1
 qiskit_aer
 qiskit_finance
 qiskit_optimization
-qiskit-azure-quantum
+azure-quantum

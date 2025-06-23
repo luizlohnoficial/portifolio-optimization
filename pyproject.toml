@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantum-portfolio"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "qiskit<1",
+    "qiskit_aer",
+    "qiskit_finance",
+    "qiskit_optimization",
+    "azure-quantum"
+]
+
+[project.scripts]
+quantum-portfolio = "quantum_portfolio.main:main"

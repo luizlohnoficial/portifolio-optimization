@@ -1,22 +1,29 @@
 name: Azure Quantum
 
 on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/azure-quantum.yml'
-      - 'quantum_portfolio.py'
-      - 'requirements.txt'
 
 jobs:
   run:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
@@ -25,4 +32,4 @@ jobs:
           AZURE_QUANTUM_RESOURCE_ID: ${{ secrets.AZURE_QUANTUM_RESOURCE_ID }}
           AZURE_QUANTUM_LOCATION: ${{ secrets.AZURE_QUANTUM_LOCATION }}
           AZURE_QUANTUM_BACKEND: ${{ secrets.AZURE_QUANTUM_BACKEND }}
-        run: python quantum_portfolio.py
+        run: python -m quantum_portfolio
