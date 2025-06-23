@@ -5,7 +5,7 @@ This repository contains a small example using Qiskit to solve a portfolio optim
 ## Requirements
 
 - Python 3.11+
-- `qiskit`, `qiskit_aer`, `qiskit_finance`, `qiskit_optimization`, and `qiskit-azure-quantum`
+- `qiskit`, `qiskit_aer`, `qiskit_finance`, `qiskit_optimization`, and `azure-quantum`
 
 To install the dependencies run:
 
